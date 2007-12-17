@@ -1,14 +1,15 @@
 %define nsusr nagios
 %define nsgrp nagios
+%define beta  b7
 
 Summary:	Nagios Data Output Utilities
 Name:		ndoutils
 Version:	1.4
-Release:	%mkrel 0.b6.1
+Release:	%mkrel 0.%{beta}.1
 Group:		System/Servers
 License:	GPL
 URL:		http://www.nagios.org/
-Source0:	http://downloads.sourceforge.net/nagios/ndoutils-%{version}b6.tar.gz
+Source0:	http://downloads.sourceforge.net/nagios/ndoutils-%{version}%{beta}.tar.gz
 Source1:	ndo2db.init
 Patch0:		ndoutils-mdv_conf.diff
 Patch1:		ndoutils-pgsql_includes_fix.diff
@@ -28,8 +29,7 @@ The NDOUTILS (Nagios Data Output Utils) addon allows you to move status and
 even information from Nagios to a database for later retrieval and processing.
 
 %prep
-
-%setup -q -n ndoutils-%{version}b6
+%setup -q -n ndoutils-%{version}%{beta}
 %patch0 -p1
 %patch1 -p0
 
