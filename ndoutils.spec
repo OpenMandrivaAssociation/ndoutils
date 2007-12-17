@@ -5,7 +5,7 @@
 Summary:	Nagios Data Output Utilities
 Name:		ndoutils
 Version:	1.4
-Release:	%mkrel 0.%{beta}.1
+Release:	%mkrel 0.%{beta}.2
 Group:		System/Servers
 License:	GPL
 URL:		http://www.nagios.org/
@@ -66,6 +66,18 @@ install -m0755 src/ndomod-3x.o %{buildroot}%{_libdir}/nagios/brokers/ndomod.o
 install -m0644 config/ndomod.cfg %{buildroot}%{_sysconfdir}/nagios/ndomod.cfg
 install -m0644 config/ndo2db.cfg %{buildroot}%{_sysconfdir}/nagios/ndo2db.cfg
 install -m0755 ndo2db.init %{buildroot}%{_initrddir}/ndo2db
+
+cat > README.mdv <<EOF
+Mandriva RPM specific notes
+
+post-installation
+-----------------
+You have to:
+- create a MySQL database
+- create an user with at least SELECT, INSERT, UPDATE, DELETE privileges on it
+- run %{_docdir}/db/mysql.sql script
+EOF
+
 
 %post
 %_post_service ndo2db
