@@ -100,16 +100,16 @@ EOF
 rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root,-)
+%defattr(-,root,root)
 %doc db docs/* Changelog README REQUIREMENTS TODO UPGRADING
 %doc config/misccommands.cfg config/nagios.cfg README.urpmi
-%attr(0755,root,root) %{_initrddir}/ndo2db 
-%attr(0644,root,root) %config(noreplace) %{_sysconfdir}/nagios/ndomod.cfg
-%attr(0644,root,root) %config(noreplace) %{_sysconfdir}/nagios/ndo2db.cfg
-%attr(0755,root,root) %{_bindir}/file2sock
-%attr(0755,root,root) %{_bindir}/log2ndo
-%attr(0755,root,root) %{_bindir}/sockdebug
-%attr(0755,root,root) %{_sbindir}/ndo2db
-%attr(0755,root,root) %{_libdir}/nagios/brokers/ndomod.o
-%attr(0755,%{nsusr},%{nsgrp}) %dir %{_localstatedir}/ndo
+%{_initrddir}/ndo2db 
+%config(noreplace) %{_sysconfdir}/nagios/ndomod.cfg
+%config(noreplace) %{_sysconfdir}/nagios/ndo2db.cfg
+%{_bindir}/file2sock
+%{_bindir}/log2ndo
+%{_bindir}/sockdebug
+%{_sbindir}/ndo2db
+%{_libdir}/nagios/brokers/ndomod.o
+%attr(-,%{nsusr},%{nsgrp}) %{_localstatedir}/ndo
 
