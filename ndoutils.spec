@@ -34,7 +34,6 @@ even information from Nagios to a database for later retrieval and processing.
 %patch1 -p0
 %patch2 -p1
 
-cp %{SOURCE1} ndo2db.init
 
 # lib64 fix
 perl -pi -e "s|/usr/lib/|%{_libdir}/|g" config/*
@@ -66,7 +65,7 @@ install -m0755 src/sockdebug %{buildroot}%{_bindir}/sockdebug
 install -m0755 src/ndomod-3x.o %{buildroot}%{_libdir}/nagios/brokers/ndomod.o
 install -m0644 config/ndomod.cfg %{buildroot}%{_sysconfdir}/nagios/ndomod.cfg
 install -m0644 config/ndo2db.cfg %{buildroot}%{_sysconfdir}/nagios/ndo2db.cfg
-install -m0755 ndo2db.init %{buildroot}%{_initrddir}/ndo2db
+install -m0755 %{SOURCE1} %{buildroot}%{_initrddir}/ndo2db
 
 cat > README.urpmi <<EOF
 Mandriva RPM specific notes
