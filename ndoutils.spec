@@ -5,7 +5,7 @@
 Summary:	Nagios Data Output Utilities
 Name:		ndoutils
 Version:	1.4
-Release:	%mkrel 0.%{beta}.2
+Release:	%mkrel 0.%{beta}.3
 Group:		System/Servers
 License:	GPL
 URL:		http://www.nagios.org/
@@ -13,6 +13,7 @@ Source0:	http://downloads.sourceforge.net/nagios/ndoutils-%{version}%{beta}.tar.
 Source1:	ndo2db.init
 Patch0:		ndoutils-mdv_conf.diff
 Patch1:		ndoutils-pgsql_includes_fix.diff
+Patch2:		ndoutils-1.4b7-no-database-prefix.patch
 Requires:       nagios >= 3.0
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
@@ -31,6 +32,7 @@ even information from Nagios to a database for later retrieval and processing.
 %setup -q -n ndoutils-%{version}%{beta}
 %patch0 -p1
 %patch1 -p0
+%patch2 -p1
 
 cp %{SOURCE1} ndo2db.init
 
@@ -66,8 +68,13 @@ install -m0644 config/ndomod.cfg %{buildroot}%{_sysconfdir}/nagios/ndomod.cfg
 install -m0644 config/ndo2db.cfg %{buildroot}%{_sysconfdir}/nagios/ndo2db.cfg
 install -m0755 ndo2db.init %{buildroot}%{_initrddir}/ndo2db
 
-cat > README.mdv <<EOF
+cat > README.urpmi <<EOF
 Mandriva RPM specific notes
+
+setup
+-----
+The mysql database creation script has been modified to not enforce a table name
+prefix by default
 
 post-installation
 -----------------
@@ -96,8 +103,8 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root,-)
 %doc db docs/* Changelog README REQUIREMENTS TODO UPGRADING
-%doc config/misccommands.cfg config/nagios.cfg
-%attr(0755,root,root) %{_initrddir}/ndo2db
+%doc config/misccommands.cfg config/nagios.cfg README.urpmi
+%attr(0755,root,root) %{_initrddir}/ndo2db 
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/nagios/ndomod.cfg
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/nagios/ndo2db.cfg
 %attr(0755,root,root) %{_bindir}/file2sock
