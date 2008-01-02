@@ -23,6 +23,7 @@ BuildRequires:	mysql-devel
 BuildRequires:	postgresql-devel
 BuildRequires:	nagios-devel
 BuildRequires:	tcp_wrappers-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 The NDOUTILS (Nagios Data Output Utils) addon allows you to move status and
