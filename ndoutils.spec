@@ -47,7 +47,7 @@ perl -pi -e "s|/usr/lib/|%{_libdir}/|g" config/*
     --with-pgsql-lib=%{_libdir} \
     --with-pgsql-inc=%{_includedir}/pgsql
 
-%make
+make
 
 %install
 rm -rf %{buildroot}
