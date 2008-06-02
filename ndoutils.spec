@@ -57,7 +57,7 @@ install -d %{buildroot}%{_sbindir}
 install -d %{buildroot}%{_bindir}
 install -d %{buildroot}%{_libdir}/nagios/brokers
 install -d %{buildroot}%{_sysconfdir}/nagios
-install -d %{buildroot}%{_localstatedir}/ndo
+install -d %{buildroot}%{_localstatedir}/lib/ndo
 
 install -m0755 src/ndo2db-3x %{buildroot}%{_sbindir}/ndo2db
 install -m0755 src/file2sock %{buildroot}%{_bindir}/file2sock
@@ -112,5 +112,5 @@ rm -rf %{buildroot}
 %{_bindir}/sockdebug
 %{_sbindir}/ndo2db
 %{_libdir}/nagios/brokers/ndomod.o
-%attr(-,%{nsusr},%{nsgrp}) %{_localstatedir}/ndo
+%attr(-,%{nsusr},%{nsgrp}) %{_localstatedir}/lib/ndo
 
