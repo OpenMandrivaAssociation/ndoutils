@@ -12,7 +12,6 @@ URL:		http://www.nagios.org/
 Source0:	http://downloads.sourceforge.net/nagios/ndoutils-%{version}%{beta}.tar.gz
 Source1:	ndo2db.init
 Patch0:		ndoutils-mdv_conf.diff
-Patch1:		ndoutils-pgsql_includes_fix.diff
 Patch2:		ndoutils-1.4b7-no-database-prefix.patch
 Requires:       nagios >= 3.0
 Requires(post): rpm-helper
@@ -32,7 +31,6 @@ even information from Nagios to a database for later retrieval and processing.
 %prep
 %setup -q -n ndoutils-%{version}%{beta}
 %patch0 -p1
-%patch1 -p0
 %patch2 -p1
 
 
