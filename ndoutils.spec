@@ -1,3 +1,5 @@
+%define _disable_ld_no_undefined 1
+
 %define nsusr nagios
 %define nsgrp nagios
 %define beta  b7
@@ -42,8 +44,7 @@ perl -pi -e "s|/usr/lib/|%{_libdir}/|g" config/*
 
 %configure2_5x \
     --with-mysql-lib=%{_libdir}/mysql \
-    --with-pgsql-lib=%{_libdir} \
-    --with-pgsql-inc=%{_includedir}/pgsql
+    --with-pgsql-lib=%{_libdir}
 
 make
 
