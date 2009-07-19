@@ -2,19 +2,20 @@
 
 %define nsusr nagios
 %define nsgrp nagios
-%define beta  b7
+%define beta  b8
 
 Summary:	Nagios Data Output Utilities
 Name:		ndoutils
 Version:	1.4
-Release:	%mkrel 6.%{beta}.6
+Release:	%mkrel 0.%{beta}.1
+Epoch:      1
 Group:		System/Servers
 License:	GPL
 URL:		http://www.nagios.org/
 Source0:	http://downloads.sourceforge.net/nagios/ndoutils-%{version}%{beta}.tar.gz
 Source1:	ndo2db.init
 Patch0:		ndoutils-mdv_conf.diff
-Patch2:		ndoutils-1.4b7-no-database-prefix.patch
+Patch2:		ndoutils-1.4b8-no-database-prefix.patch
 Requires:       nagios >= 3.0
 Requires(post): rpm-helper
 Requires(preun): rpm-helper
@@ -24,11 +25,34 @@ BuildRequires:	mysql-devel
 BuildRequires:	postgresql-devel
 BuildRequires:	nagios-devel
 BuildRequires:	tcp_wrappers-devel
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root
+BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 The NDOUTILS (Nagios Data Output Utils) addon allows you to move status and
 even information from Nagios to a database for later retrieval and processing.
+
+%package common
+Summary:    The part common to client and server parts
+Group:		System/Servers
+
+%description common
+This package contains the part common to client and server parts.
+
+%package client
+Summary:    The client part of %{name}
+Group:		System/Servers
+Requires:   %{name}-common = %{version}-%{release}
+
+%description client
+This package contains the client part of NDOUTILS (Nagios Data Output Utils).
+
+%package server
+Summary:    The server part of %{name}
+Group:		System/Servers
+Requires:   %{name}-common = %{version}-%{release}
+
+%description server
+This package contains the server part of NDOUTILS (Nagios Data Output Utils).
 
 %prep
 %setup -q -n ndoutils-%{version}%{beta}
@@ -84,32 +108,37 @@ You have to:
 EOF
 
 
-%post
+%post server
 %_post_service ndo2db
 
-%preun
+%preun server
 %_preun_service ndo2db
 
-%pre
+%pre common
 %_pre_useradd %{nsusr} /var/log/nagios /bin/sh
 
-%postun
+%postun common
 %_postun_userdel %{nsusr}
 
 %clean
 rm -rf %{buildroot}
 
-%files
+%files common
 %defattr(-,root,root)
 %doc db docs/* Changelog README REQUIREMENTS TODO UPGRADING
 %doc config/misccommands.cfg config/nagios.cfg README.urpmi
-%{_initrddir}/ndo2db 
-%config(noreplace) %{_sysconfdir}/nagios/ndomod.cfg
-%config(noreplace) %{_sysconfdir}/nagios/ndo2db.cfg
+%attr(-,%{nsusr},%{nsgrp}) %{_localstatedir}/lib/ndo
+
+%files client
+%defattr(-,root,root)
 %{_bindir}/file2sock
 %{_bindir}/log2ndo
 %{_bindir}/sockdebug
-%{_sbindir}/ndo2db
 %{_libdir}/nagios/brokers/ndomod.o
-%attr(-,%{nsusr},%{nsgrp}) %{_localstatedir}/lib/ndo
+%config(noreplace) %{_sysconfdir}/nagios/ndomod.cfg
 
+%files server
+%defattr(-,root,root)
+%{_initrddir}/ndo2db 
+%config(noreplace) %{_sysconfdir}/nagios/ndo2db.cfg
+%{_sbindir}/ndo2db
