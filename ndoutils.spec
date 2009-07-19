@@ -1,4 +1,4 @@
-%define _disable_ld_no_undefined 1
+#define _disable_ld_no_undefined 1
 
 %define nsusr nagios
 %define nsgrp nagios
@@ -7,7 +7,7 @@
 Summary:	Nagios Data Output Utilities
 Name:		ndoutils
 Version:	1.4
-Release:	%mkrel 0.%{beta}.1
+Release:	%mkrel 0.%{beta}.2
 Epoch:      1
 Group:		System/Servers
 License:	GPL
@@ -41,7 +41,7 @@ This package contains the part common to client and server parts.
 %package client
 Summary:    The client part of %{name}
 Group:		System/Servers
-Requires:   %{name}-common = %{version}-%{release}
+Requires:   %{name}-common = %{epoch}:%{version}-%{release}
 
 %description client
 This package contains the client part of NDOUTILS (Nagios Data Output Utils).
@@ -49,7 +49,7 @@ This package contains the client part of NDOUTILS (Nagios Data Output Utils).
 %package server
 Summary:    The server part of %{name}
 Group:		System/Servers
-Requires:   %{name}-common = %{version}-%{release}
+Requires:   %{name}-common = %{epoch}:%{version}-%{release}
 
 %description server
 This package contains the server part of NDOUTILS (Nagios Data Output Utils).
