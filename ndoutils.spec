@@ -2,19 +2,19 @@
 
 %define nsusr nagios
 %define nsgrp nagios
-%define beta  b8
+%define beta  b9
 
 Summary:	Nagios Data Output Utilities
 Name:		ndoutils
 Version:	1.4
-Release:	%mkrel 0.%{beta}.3
+Release:	%mkrel 0.%{beta}.1
 Epoch:      1
 Group:		System/Servers
 License:	GPL
 URL:		http://www.nagios.org/
 Source0:	http://downloads.sourceforge.net/nagios/ndoutils-%{version}%{beta}.tar.gz
 Source1:	ndo2db.init
-Patch0:		ndoutils-mdv_conf.diff
+Patch0:		ndoutils-1.4b9-mdv-config.patch
 Patch2:		ndoutils-1.4b8-no-database-prefix.patch
 Requires:       nagios >= 3.0
 Requires(post): rpm-helper
@@ -87,8 +87,10 @@ install -m0755 src/file2sock %{buildroot}%{_bindir}/file2sock
 install -m0755 src/log2ndo %{buildroot}%{_bindir}/log2ndo
 install -m0755 src/sockdebug %{buildroot}%{_bindir}/sockdebug
 install -m0755 src/ndomod-3x.o %{buildroot}%{_libdir}/nagios/brokers/ndomod.o
-install -m0644 config/ndomod.cfg %{buildroot}%{_sysconfdir}/nagios/ndomod.cfg
-install -m0644 config/ndo2db.cfg %{buildroot}%{_sysconfdir}/nagios/ndo2db.cfg
+install -m0644 config/ndomod.cfg-sample \
+    %{buildroot}%{_sysconfdir}/nagios/ndomod.cfg
+install -m0644 config/ndo2db.cfg-sample \
+    %{buildroot}%{_sysconfdir}/nagios/ndo2db.cfg
 install -m0755 %{SOURCE1} %{buildroot}%{_initrddir}/ndo2db
 
 cat > README.urpmi <<EOF
