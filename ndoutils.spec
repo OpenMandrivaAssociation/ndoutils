@@ -7,7 +7,7 @@
 Summary:	Nagios Data Output Utilities
 Name:		ndoutils
 Version:	1.4
-Release:	%mkrel 0.%{beta}.2
+Release:	%mkrel 0.%{beta}.4
 Epoch:      1
 Group:		System/Servers
 License:	GPL
