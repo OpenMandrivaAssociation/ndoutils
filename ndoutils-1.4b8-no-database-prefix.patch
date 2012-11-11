@@ -1,0 +1,770 @@
+diff -Naur -x '*~' -x '*.orig' -x '*.rej' ndoutils-1.4b8/db/mysql.sql ndoutils-1.4b8-no-database-prefix/db/mysql.sql
+--- ndoutils-1.4b8/db/mysql.sql	2009-07-01 21:04:12.000000000 +0200
++++ ndoutils-1.4b8-no-database-prefix/db/mysql.sql	2009-07-19 15:11:15.000000000 +0200
+@@ -21,10 +21,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_acknowledgements`
++-- Table structure for table `acknowledgements`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_acknowledgements` (
++CREATE TABLE IF NOT EXISTS `acknowledgements` (
+   `acknowledgement_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `entry_time` datetime NOT NULL default '0000-00-00 00:00:00',
+@@ -43,10 +43,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_commands`
++-- Table structure for table `commands`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_commands` (
++CREATE TABLE IF NOT EXISTS `commands` (
+   `command_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `config_type` smallint(6) NOT NULL default '0',
+@@ -59,10 +59,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_commenthistory`
++-- Table structure for table `commenthistory`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_commenthistory` (
++CREATE TABLE IF NOT EXISTS `commenthistory` (
+   `commenthistory_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `entry_time` datetime NOT NULL default '0000-00-00 00:00:00',
+@@ -87,10 +87,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_comments`
++-- Table structure for table `comments`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_comments` (
++CREATE TABLE IF NOT EXISTS `comments` (
+   `comment_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `entry_time` datetime NOT NULL default '0000-00-00 00:00:00',
+@@ -113,10 +113,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_configfiles`
++-- Table structure for table `configfiles`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_configfiles` (
++CREATE TABLE IF NOT EXISTS `configfiles` (
+   `configfile_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `configfile_type` smallint(6) NOT NULL default '0',
+@@ -128,10 +128,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_configfilevariables`
++-- Table structure for table `configfilevariables`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_configfilevariables` (
++CREATE TABLE IF NOT EXISTS `configfilevariables` (
+   `configfilevariable_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `configfile_id` int(11) NOT NULL default '0',
+@@ -143,10 +143,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_conninfo`
++-- Table structure for table `conninfo`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_conninfo` (
++CREATE TABLE IF NOT EXISTS `conninfo` (
+   `conninfo_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `agent_name` varchar(32) character set latin1 NOT NULL default '',
+@@ -168,10 +168,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_contactgroups`
++-- Table structure for table `contactgroups`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_contactgroups` (
++CREATE TABLE IF NOT EXISTS `contactgroups` (
+   `contactgroup_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `config_type` smallint(6) NOT NULL default '0',
+@@ -184,10 +184,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_contactgroup_members`
++-- Table structure for table `contactgroup_members`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_contactgroup_members` (
++CREATE TABLE IF NOT EXISTS `contactgroup_members` (
+   `contactgroup_member_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `contactgroup_id` int(11) NOT NULL default '0',
+@@ -199,10 +199,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_contactnotificationmethods`
++-- Table structure for table `contactnotificationmethods`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_contactnotificationmethods` (
++CREATE TABLE IF NOT EXISTS `contactnotificationmethods` (
+   `contactnotificationmethod_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `contactnotification_id` int(11) NOT NULL default '0',
+@@ -219,10 +219,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_contactnotifications`
++-- Table structure for table `contactnotifications`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_contactnotifications` (
++CREATE TABLE IF NOT EXISTS `contactnotifications` (
+   `contactnotification_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `notification_id` int(11) NOT NULL default '0',
+@@ -238,10 +238,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_contacts`
++-- Table structure for table `contacts`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_contacts` (
++CREATE TABLE IF NOT EXISTS `contacts` (
+   `contact_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `config_type` smallint(6) NOT NULL default '0',
+@@ -272,10 +272,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_contactstatus`
++-- Table structure for table `contactstatus`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_contactstatus` (
++CREATE TABLE IF NOT EXISTS `contactstatus` (
+   `contactstatus_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `contact_object_id` int(11) NOT NULL default '0',
+@@ -294,10 +294,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_contact_addresses`
++-- Table structure for table `contact_addresses`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_contact_addresses` (
++CREATE TABLE IF NOT EXISTS `contact_addresses` (
+   `contact_address_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `contact_id` int(11) NOT NULL default '0',
+@@ -310,10 +310,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_contact_notificationcommands`
++-- Table structure for table `contact_notificationcommands`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_contact_notificationcommands` (
++CREATE TABLE IF NOT EXISTS `contact_notificationcommands` (
+   `contact_notificationcommand_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `contact_id` int(11) NOT NULL default '0',
+@@ -327,10 +327,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_customvariables`
++-- Table structure for table `customvariables`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_customvariables` (
++CREATE TABLE IF NOT EXISTS `customvariables` (
+   `customvariable_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `object_id` int(11) NOT NULL default '0',
+@@ -346,10 +346,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_customvariablestatus`
++-- Table structure for table `customvariablestatus`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_customvariablestatus` (
++CREATE TABLE IF NOT EXISTS `customvariablestatus` (
+   `customvariablestatus_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `object_id` int(11) NOT NULL default '0',
+@@ -365,10 +365,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_dbversion`
++-- Table structure for table `dbversion`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_dbversion` (
++CREATE TABLE IF NOT EXISTS `dbversion` (
+   `name` varchar(10) character set latin1 NOT NULL default '',
+   `version` varchar(10) character set latin1 NOT NULL default ''
+ ) ENGINE=MyISAM;
+@@ -376,10 +376,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_downtimehistory`
++-- Table structure for table `downtimehistory`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_downtimehistory` (
++CREATE TABLE IF NOT EXISTS `downtimehistory` (
+   `downtimehistory_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `downtime_type` smallint(6) NOT NULL default '0',
+@@ -406,10 +406,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_eventhandlers`
++-- Table structure for table `eventhandlers`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_eventhandlers` (
++CREATE TABLE IF NOT EXISTS `eventhandlers` (
+   `eventhandler_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `eventhandler_type` smallint(6) NOT NULL default '0',
+@@ -436,10 +436,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_externalcommands`
++-- Table structure for table `externalcommands`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_externalcommands` (
++CREATE TABLE IF NOT EXISTS `externalcommands` (
+   `externalcommand_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `entry_time` datetime NOT NULL default '0000-00-00 00:00:00',
+@@ -452,10 +452,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_flappinghistory`
++-- Table structure for table `flappinghistory`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_flappinghistory` (
++CREATE TABLE IF NOT EXISTS `flappinghistory` (
+   `flappinghistory_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `event_time` datetime NOT NULL default '0000-00-00 00:00:00',
+@@ -475,10 +475,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_hostchecks`
++-- Table structure for table `hostchecks`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_hostchecks` (
++CREATE TABLE IF NOT EXISTS `hostchecks` (
+   `hostcheck_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `host_object_id` int(11) NOT NULL default '0',
+@@ -510,10 +510,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_hostdependencies`
++-- Table structure for table `hostdependencies`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_hostdependencies` (
++CREATE TABLE IF NOT EXISTS `hostdependencies` (
+   `hostdependency_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `config_type` smallint(6) NOT NULL default '0',
+@@ -532,10 +532,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_hostescalations`
++-- Table structure for table `hostescalations`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_hostescalations` (
++CREATE TABLE IF NOT EXISTS `hostescalations` (
+   `hostescalation_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `config_type` smallint(6) NOT NULL default '0',
+@@ -554,10 +554,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_hostescalation_contactgroups`
++-- Table structure for table `hostescalation_contactgroups`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_hostescalation_contactgroups` (
++CREATE TABLE IF NOT EXISTS `hostescalation_contactgroups` (
+   `hostescalation_contactgroup_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `hostescalation_id` int(11) NOT NULL default '0',
+@@ -569,10 +569,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_hostescalation_contacts`
++-- Table structure for table `hostescalation_contacts`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_hostescalation_contacts` (
++CREATE TABLE IF NOT EXISTS `hostescalation_contacts` (
+   `hostescalation_contact_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `hostescalation_id` int(11) NOT NULL default '0',
+@@ -584,10 +584,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_hostgroups`
++-- Table structure for table `hostgroups`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_hostgroups` (
++CREATE TABLE IF NOT EXISTS `hostgroups` (
+   `hostgroup_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `config_type` smallint(6) NOT NULL default '0',
+@@ -600,10 +600,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_hostgroup_members`
++-- Table structure for table `hostgroup_members`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_hostgroup_members` (
++CREATE TABLE IF NOT EXISTS `hostgroup_members` (
+   `hostgroup_member_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `hostgroup_id` int(11) NOT NULL default '0',
+@@ -615,10 +615,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_hosts`
++-- Table structure for table `hosts`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_hosts` (
++CREATE TABLE IF NOT EXISTS `hosts` (
+   `host_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `config_type` smallint(6) NOT NULL default '0',
+@@ -685,10 +685,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_hoststatus`
++-- Table structure for table `hoststatus`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_hoststatus` (
++CREATE TABLE IF NOT EXISTS `hoststatus` (
+   `hoststatus_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `host_object_id` int(11) NOT NULL default '0',
+@@ -760,10 +760,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_host_contactgroups`
++-- Table structure for table `host_contactgroups`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_host_contactgroups` (
++CREATE TABLE IF NOT EXISTS `host_contactgroups` (
+   `host_contactgroup_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `host_id` int(11) NOT NULL default '0',
+@@ -775,10 +775,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_host_contacts`
++-- Table structure for table `host_contacts`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_host_contacts` (
++CREATE TABLE IF NOT EXISTS `host_contacts` (
+   `host_contact_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `host_id` int(11) NOT NULL default '0',
+@@ -790,10 +790,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_host_parenthosts`
++-- Table structure for table `host_parenthosts`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_host_parenthosts` (
++CREATE TABLE IF NOT EXISTS `host_parenthosts` (
+   `host_parenthost_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `host_id` int(11) NOT NULL default '0',
+@@ -805,10 +805,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_instances`
++-- Table structure for table `instances`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_instances` (
++CREATE TABLE IF NOT EXISTS `instances` (
+   `instance_id` smallint(6) NOT NULL auto_increment,
+   `instance_name` varchar(64) character set latin1 NOT NULL default '',
+   `instance_description` varchar(128) character set latin1 NOT NULL default '',
+@@ -818,10 +818,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_logentries`
++-- Table structure for table `logentries`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_logentries` (
++CREATE TABLE IF NOT EXISTS `logentries` (
+   `logentry_id` int(11) NOT NULL auto_increment,
+   `instance_id` int(11) NOT NULL default '0',
+   `logentry_time` datetime NOT NULL default '0000-00-00 00:00:00',
+@@ -837,10 +837,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_notifications`
++-- Table structure for table `notifications`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_notifications` (
++CREATE TABLE IF NOT EXISTS `notifications` (
+   `notification_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `notification_type` smallint(6) NOT NULL default '0',
+@@ -862,10 +862,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_objects`
++-- Table structure for table `objects`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_objects` (
++CREATE TABLE IF NOT EXISTS `objects` (
+   `object_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `objecttype_id` smallint(6) NOT NULL default '0',
+@@ -879,10 +879,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_processevents`
++-- Table structure for table `processevents`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_processevents` (
++CREATE TABLE IF NOT EXISTS `processevents` (
+   `processevent_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `event_type` smallint(6) NOT NULL default '0',
+@@ -898,10 +898,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_programstatus`
++-- Table structure for table `programstatus`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_programstatus` (
++CREATE TABLE IF NOT EXISTS `programstatus` (
+   `programstatus_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `status_update_time` datetime NOT NULL default '0000-00-00 00:00:00',
+@@ -934,10 +934,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_runtimevariables`
++-- Table structure for table `runtimevariables`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_runtimevariables` (
++CREATE TABLE IF NOT EXISTS `runtimevariables` (
+   `runtimevariable_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `varname` varchar(64) character set latin1 NOT NULL default '',
+@@ -949,10 +949,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_scheduleddowntime`
++-- Table structure for table `scheduleddowntime`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_scheduleddowntime` (
++CREATE TABLE IF NOT EXISTS `scheduleddowntime` (
+   `scheduleddowntime_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `downtime_type` smallint(6) NOT NULL default '0',
+@@ -976,10 +976,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_servicechecks`
++-- Table structure for table `servicechecks`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_servicechecks` (
++CREATE TABLE IF NOT EXISTS `servicechecks` (
+   `servicecheck_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `service_object_id` int(11) NOT NULL default '0',
+@@ -1012,10 +1012,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_servicedependencies`
++-- Table structure for table `servicedependencies`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_servicedependencies` (
++CREATE TABLE IF NOT EXISTS `servicedependencies` (
+   `servicedependency_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `config_type` smallint(6) NOT NULL default '0',
+@@ -1035,10 +1035,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_serviceescalations`
++-- Table structure for table `serviceescalations`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_serviceescalations` (
++CREATE TABLE IF NOT EXISTS `serviceescalations` (
+   `serviceescalation_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `config_type` smallint(6) NOT NULL default '0',
+@@ -1058,10 +1058,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_serviceescalation_contactgroups`
++-- Table structure for table `serviceescalation_contactgroups`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_serviceescalation_contactgroups` (
++CREATE TABLE IF NOT EXISTS `serviceescalation_contactgroups` (
+   `serviceescalation_contactgroup_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `serviceescalation_id` int(11) NOT NULL default '0',
+@@ -1073,10 +1073,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_serviceescalation_contacts`
++-- Table structure for table `serviceescalation_contacts`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_serviceescalation_contacts` (
++CREATE TABLE IF NOT EXISTS `serviceescalation_contacts` (
+   `serviceescalation_contact_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `serviceescalation_id` int(11) NOT NULL default '0',
+@@ -1088,10 +1088,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_servicegroups`
++-- Table structure for table `servicegroups`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_servicegroups` (
++CREATE TABLE IF NOT EXISTS `servicegroups` (
+   `servicegroup_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `config_type` smallint(6) NOT NULL default '0',
+@@ -1104,10 +1104,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_servicegroup_members`
++-- Table structure for table `servicegroup_members`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_servicegroup_members` (
++CREATE TABLE IF NOT EXISTS `servicegroup_members` (
+   `servicegroup_member_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `servicegroup_id` int(11) NOT NULL default '0',
+@@ -1119,10 +1119,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_services`
++-- Table structure for table `services`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_services` (
++CREATE TABLE IF NOT EXISTS `services` (
+   `service_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `config_type` smallint(6) NOT NULL default '0',
+@@ -1183,10 +1183,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_servicestatus`
++-- Table structure for table `servicestatus`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_servicestatus` (
++CREATE TABLE IF NOT EXISTS `servicestatus` (
+   `servicestatus_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `service_object_id` int(11) NOT NULL default '0',
+@@ -1259,10 +1259,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_service_contactgroups`
++-- Table structure for table `service_contactgroups`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_service_contactgroups` (
++CREATE TABLE IF NOT EXISTS `service_contactgroups` (
+   `service_contactgroup_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `service_id` int(11) NOT NULL default '0',
+@@ -1274,10 +1274,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_service_contacts`
++-- Table structure for table `service_contacts`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_service_contacts` (
++CREATE TABLE IF NOT EXISTS `service_contacts` (
+   `service_contact_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `service_id` int(11) NOT NULL default '0',
+@@ -1289,10 +1289,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_statehistory`
++-- Table structure for table `statehistory`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_statehistory` (
++CREATE TABLE IF NOT EXISTS `statehistory` (
+   `statehistory_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `state_time` datetime NOT NULL default '0000-00-00 00:00:00',
+@@ -1313,10 +1313,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_systemcommands`
++-- Table structure for table `systemcommands`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_systemcommands` (
++CREATE TABLE IF NOT EXISTS `systemcommands` (
+   `systemcommand_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `start_time` datetime NOT NULL default '0000-00-00 00:00:00',
+@@ -1338,10 +1338,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_timedeventqueue`
++-- Table structure for table `timedeventqueue`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_timedeventqueue` (
++CREATE TABLE IF NOT EXISTS `timedeventqueue` (
+   `timedeventqueue_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `event_type` smallint(6) NOT NULL default '0',
+@@ -1360,10 +1360,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_timedevents`
++-- Table structure for table `timedevents`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_timedevents` (
++CREATE TABLE IF NOT EXISTS `timedevents` (
+   `timedevent_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `event_type` smallint(6) NOT NULL default '0',
+@@ -1386,10 +1386,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_timeperiods`
++-- Table structure for table `timeperiods`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_timeperiods` (
++CREATE TABLE IF NOT EXISTS `timeperiods` (
+   `timeperiod_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `config_type` smallint(6) NOT NULL default '0',
+@@ -1402,10 +1402,10 @@
+ -- --------------------------------------------------------
+ 
+ --
+--- Table structure for table `nagios_timeperiod_timeranges`
++-- Table structure for table `timeperiod_timeranges`
+ --
+ 
+-CREATE TABLE IF NOT EXISTS `nagios_timeperiod_timeranges` (
++CREATE TABLE IF NOT EXISTS `timeperiod_timeranges` (
+   `timeperiod_timerange_id` int(11) NOT NULL auto_increment,
+   `instance_id` smallint(6) NOT NULL default '0',
+   `timeperiod_id` int(11) NOT NULL default '0',

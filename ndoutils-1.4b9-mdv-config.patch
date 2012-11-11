@@ -1,0 +1,65 @@
+diff -Naur -x '*~' ndoutils-1.4b9/config/misccommands.cfg.in ndoutils-1.4b9-mdv-config/config/misccommands.cfg.in
+--- ndoutils-1.4b9/config/misccommands.cfg.in	2009-09-06 22:51:38.000000000 +0200
++++ ndoutils-1.4b9-mdv-config/config/misccommands.cfg.in	2010-03-29 17:13:21.000000000 +0200
+@@ -7,5 +7,5 @@
+ 
+ define command{
+ 	command_name	rotate_ndo_log
+-	command_line	/bin/mv @localstatedir@/ndo.dat @localstatedir@/ndo.`date +%s`
++	command_line	/bin/mv @localstatedir@/lib/ndo/ndo.dat @localstatedir@/lib/ndo/ndo.`date +%s`
+         }
+diff -Naur -x '*~' ndoutils-1.4b9/config/nagios.cfg.in ndoutils-1.4b9-mdv-config/config/nagios.cfg.in
+--- ndoutils-1.4b9/config/nagios.cfg.in	2009-09-06 22:51:38.000000000 +0200
++++ ndoutils-1.4b9-mdv-config/config/nagios.cfg.in	2010-03-29 17:10:44.000000000 +0200
+@@ -5,7 +5,7 @@
+ # configuration file (nagios.cfg).  Adjust the paths, etc. to suit your needs.
+ 
+ # Uncomment the line below if you're running Nagios 2.x
+-broker_module=@bindir@/ndomod-2x.o config_file=@sysconfdir@/ndomod.cfg
++#broker_module=@libdir@/nagios/brokers/ndomod-2x.o config_file=@sysconfdir@/nagios/ndomod.cfg
+ 
+ # Uncomment the line below if you're running Nagios 3.x
+-#broker_module=@bindir@/ndomod-3x.o config_file=@sysconfdir@/ndomod.cfg
++broker_module=@libdir@/nagios/brokers/ndomod-3x.o config_file=@sysconfdir@/nagios/ndomod.cfg
+diff -Naur -x '*~' ndoutils-1.4b9/config/ndo2db.cfg-sample.in ndoutils-1.4b9-mdv-config/config/ndo2db.cfg-sample.in
+--- ndoutils-1.4b9/config/ndo2db.cfg-sample.in	2009-09-15 14:08:32.000000000 +0200
++++ ndoutils-1.4b9-mdv-config/config/ndo2db.cfg-sample.in	2010-03-29 17:11:50.000000000 +0200
+@@ -41,7 +41,7 @@
+ # This option is only valid if the socket type specified above
+ # is "unix".
+ 
+-socket_name=@localstatedir@/ndo.sock
++socket_name=@localstatedir@/lib/ndo/ndo.sock
+ 
+ 
+ 
+@@ -177,7 +177,7 @@
+ # DEBUG FILE
+ # This option determines where the daemon should write debugging information.
+ 
+-debug_file=@localstatedir@/ndo2db.debug
++debug_file=@localstatedir@/log/nagios/ndo2db.debug
+ 
+ 
+ 
+diff -Naur -x '*~' ndoutils-1.4b9/config/ndomod.cfg-sample.in ndoutils-1.4b9-mdv-config/config/ndomod.cfg-sample.in
+--- ndoutils-1.4b9/config/ndomod.cfg-sample.in	2009-09-06 22:51:38.000000000 +0200
++++ ndoutils-1.4b9-mdv-config/config/ndomod.cfg-sample.in	2010-03-29 17:12:46.000000000 +0200
+@@ -37,7 +37,7 @@
+ 
+ #output=@localstatedir@/ndo.dat
+ #output=127.0.0.1
+-output=@localstatedir@/ndo.sock
++output=@localstatedir@/lib/ndo/ndo.sock
+ 
+ 
+ 
+@@ -82,7 +82,7 @@
+ # Nagios (re)starts, the NDO NEB module will read the contents of this
+ # file and send it to the NDO2DB daemon for processing.
+ 
+-buffer_file=@localstatedir@/ndomod.tmp
++buffer_file=@localstatedir@/lib/ndo/ndomod.tmp
+ 
+ 
+ 
