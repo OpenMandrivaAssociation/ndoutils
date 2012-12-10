@@ -144,3 +144,93 @@ rm -rf %{buildroot}
 %{_initrddir}/ndo2db 
 %config(noreplace) %{_sysconfdir}/nagios/ndo2db.cfg
 %{_sbindir}/ndo2db
+
+
+%changelog
+* Thu Mar 17 2011 Oden Eriksson <oeriksson@mandriva.com> 1:1.4-0.b9.6mdv2011.0
++ Revision: 645848
+- relink against libmysqlclient.so.18
+
+* Sat Jan 01 2011 Oden Eriksson <oeriksson@mandriva.com> 1:1.4-0.b9.5mdv2011.0
++ Revision: 627266
+- rebuilt against mysql-5.5.8 libs, again
+
+* Thu Dec 30 2010 Oden Eriksson <oeriksson@mandriva.com> 1:1.4-0.b9.4mdv2011.0
++ Revision: 626547
+- rebuilt against mysql-5.5.8 libs
+
+* Mon Dec 06 2010 Oden Eriksson <oeriksson@mandriva.com> 1:1.4-0.b9.2mdv2011.0
++ Revision: 613005
+- the mass rebuild of 2010.1 packages
+
+* Mon Mar 29 2010 Guillaume Rousse <guillomovitch@mandriva.org> 1:1.4-0.b9.1mdv2010.1
++ Revision: 528815
+- new version
+
+* Thu Feb 18 2010 Oden Eriksson <oeriksson@mandriva.com> 1:1.4-0.b8.3mdv2010.1
++ Revision: 507493
+- rebuild
+
+  + Thomas Backlund <tmb@mandriva.org>
+    - fix spacing in initscript
+
+* Sun Jul 19 2009 Guillaume Rousse <guillomovitch@mandriva.org> 1:1.4-0.b8.2mdv2010.0
++ Revision: 397982
+- fix dependencies for the -common package
+
+* Sun Jul 19 2009 Guillaume Rousse <guillomovitch@mandriva.org> 1:1.4-0.b8.1mdv2010.0
++ Revision: 397489
+- new version
+- rediff no-database-prefix patch
+- set epoch, as release tag was wrong
+
+* Sat Dec 06 2008 Oden Eriksson <oeriksson@mandriva.com> 1.4-6.b7.6mdv2009.1
++ Revision: 311387
+- fix build
+- nuke P1, not needed anymore
+- rebuilt against mysql-5.1.30 libs
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild early 2009.0 package (before pixel changes)
+
+  + Pixel <pixel@mandriva.com>
+    - adapt to %%_localstatedir now being /var instead of /var/lib (#22312)
+
+* Thu May 15 2008 Guillaume Rousse <guillomovitch@mandriva.org> 1.4-0.b7.5mdv2009.0
++ Revision: 207542
+- delete stale socket if present when starting
+- LSB headers in initscript
+
+* Thu Feb 14 2008 Oden Eriksson <oeriksson@mandriva.com> 1.4-0.b7.4mdv2008.1
++ Revision: 168650
+- try to build it without the %%make macro
+- rebuild
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+* Wed Dec 19 2007 Guillaume Rousse <guillomovitch@mandriva.org> 1.4-0.b7.3mdv2008.1
++ Revision: 133918
+- no duplication of file perms in %%file section
+- avoid useless intermediate copy of additional sources
+- patch2: don't use prefix by default for database table names
+  add README.urpmi
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Mon Dec 17 2007 Guillaume Rousse <guillomovitch@mandriva.org> 1.4-0.b7.2mdv2008.1
++ Revision: 124217
+- rediff configuration patch to fix log file location
+
+* Mon Dec 17 2007 Guillaume Rousse <guillomovitch@mandriva.org> 1.4-0.b7.1mdv2008.1
++ Revision: 121724
+- new version
+
+* Fri Oct 12 2007 Oden Eriksson <oeriksson@mandriva.com> 1.4-0.b6.1mdv2008.1
++ Revision: 97496
+- import ndoutils
+
+
+* Fri Oct 12 2007 Oden Eriksson <oeriksson@mandriva.com> 1.4-0.b6.1mdv2008.0
+- initial Mandriva package

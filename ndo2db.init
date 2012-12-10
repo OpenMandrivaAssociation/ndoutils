@@ -1,0 +1,75 @@
+#!/bin/sh
+#
+# chkconfig: 2345 85 15
+
+### BEGIN INIT INFO
+# Provides: ndo2db
+# Required-Start: $network mysql
+# Requires-Stop: $network
+# Default-Start:  3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: Starts and stops NDO2DB
+# Description: Nagios Data Object Broker daemon
+### END INIT INFO
+
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Source networking configuration.
+. /etc/sysconfig/network
+
+# Check that networking is up.
+[ "$NETWORKING" = "no" ] && exit 0
+
+[ -e /etc/sysconfig/ndo2db ] && . /etc/sysconfig/ndo2db
+
+RETVAL=0
+
+start() {
+    echo -n "Starting ndoutils broker: "
+    # remove stale socket if still present
+    socket=`awk -F= '/^socket_name/ {print $2}' /etc/nagios/ndo2db.cfg`
+    [ -e $socket ] && rm -f $socket
+    daemon ndo2db -c /etc/nagios/ndo2db.cfg
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch /var/lock/subsys/ndo2db
+    return $RETVAL
+}
+
+stop() {
+    echo -n "Stopping ndoutils broker: "
+    killproc ndo2db
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/ndo2db
+    return $RETVAL
+}
+
+restart() {
+    stop
+    start
+}
+
+reload() {
+    restart
+}
+
+fdr_status() {
+    status ndo2db
+}
+
+case "$1" in
+    start|stop|restart|reload)
+        $1
+        ;;
+    status)
+        fdr_status
+        ;;
+    condrestart)
+  	[ ! -f /var/lock/subsys/ndo2db ] || restart
+	;;
+    *)
+        echo "Usage: $0 {start|stop|status|restart|reload}"
+        exit 2
+esac
