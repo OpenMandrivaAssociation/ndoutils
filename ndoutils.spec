@@ -11,7 +11,7 @@ Release:	%mkrel 0.%{beta}.6
 Epoch:      1
 Group:		System/Servers
 License:	GPL
-URL:		http://www.nagios.org/
+URL:		https://www.nagios.org/
 Source0:	http://downloads.sourceforge.net/nagios/ndoutils-%{version}%{beta}.tar.gz
 Source1:	ndo2db.init
 Patch0:		ndoutils-1.4b9-mdv-config.patch
